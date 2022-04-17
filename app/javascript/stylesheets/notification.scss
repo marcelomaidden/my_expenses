@@ -8,6 +8,8 @@
 }
 
 .notification {
+  width: 400px;
+  margin: auto;
   -moz-animation: cssAnimation 0s ease-in 10s forwards;
   /* Firefox */
   -webkit-animation: cssAnimation 0s ease-in 10s forwards;
