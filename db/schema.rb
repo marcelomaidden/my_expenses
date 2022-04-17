@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_193738) do
+ActiveRecord::Schema.define(version: 2022_04_17_155211) do
+
+  create_table "card_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.integer "status", default: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "number"
+    t.date "expiration"
+    t.integer "status", default: 1
+    t.bigint "card_category_id", null: false
+    t.integer "manager_id"
+    t.string "cvv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_category_id"], name: "index_cards_on_card_category_id"
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -23,4 +45,6 @@ ActiveRecord::Schema.define(version: 2022_04_16_193738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "card_categories"
+  add_foreign_key "cards", "users"
 end
