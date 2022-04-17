@@ -12,7 +12,7 @@ class NotificationComponent < ViewComponent::Base
   def notification_background
     case type
     when "notice"
-      "alert alert-warning"
+      "alert alert-success"
     when "danger"
       "alert alert-danger"
     when "alert"

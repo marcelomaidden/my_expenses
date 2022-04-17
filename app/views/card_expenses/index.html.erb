@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Card Expenses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Card</th>
+      <th>Payable</th>
+      <th>Installments</th>
+      <th>Value</th>
+      <th>Due date</th>
+      <th>Last date</th>
+      <th>Status</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_expenses.each do |card_expense| %>
+      <tr>
+        <td><%= card_expense.card_id %></td>
+        <td><%= card_expense.payable_id %></td>
+        <td><%= card_expense.installments %></td>
+        <td><%= card_expense.value %></td>
+        <td><%= card_expense.due_date %></td>
+        <td><%= card_expense.last_date %></td>
+        <td><%= card_expense.status %></td>
+        <td><%= card_expense.total %></td>
+        <td><%= link_to 'Show', card_expense %></td>
+        <td><%= link_to 'Edit', edit_card_expense_path(card_expense) %></td>
+        <td><%= link_to 'Destroy', card_expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card Expense', new_card_expense_path %>

@@ -12,7 +12,7 @@
 
   <body>
     <% flash.each do |type, message|  %>
-      <%= render NotificationComponent.new(message: message, type: type, title: "Warning") %>
+      <%= render NotificationComponent.new(message: message, type: type, title: "Message") %>
     <% end %>
     <%= yield %>
   </body>

@@ -1,11 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Cards</h1>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
       <th>Name</th>
       <th>Number</th>
       <th>Expiration</th>
@@ -20,13 +17,12 @@
   <tbody>
     <% @cards.each do |card| %>
       <tr>
-        <td><%= card.user_id %></td>
         <td><%= card.name %></td>
         <td><%= card.number %></td>
         <td><%= card.expiration %></td>
         <td><%= card.status %></td>
-        <td><%= card.card_category_id %></td>
-        <td><%= card.manager %></td>
+        <td><%= card.card_category.name %></td>
+        <td><%= card.manager&.name %></td>
         <td><%= card.cvv %></td>
         <td><%= link_to 'Show', card %></td>
         <td><%= link_to 'Edit', edit_card_path(card) %></td>

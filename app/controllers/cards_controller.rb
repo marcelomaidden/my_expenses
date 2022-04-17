@@ -1,9 +1,8 @@
 class CardsController < ApplicationController
   before_action :set_card, only: %i[ show edit update destroy ]
-
   # GET /cards or /cards.json
   def index
-    @cards = Card.all
+    @cards = current_user.cards.or(current_user.managed_cards)
   end
 
   # GET /cards/1 or /cards/1.json
