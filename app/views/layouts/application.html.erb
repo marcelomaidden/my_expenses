@@ -6,12 +6,13 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <% flash.each do |type, message|  %>
-      <%= render NotificationComponent.new(message: message, type: type) %>
+      <%= render NotificationComponent.new(message: message, type: type, title: "Warning") %>
     <% end %>
     <%= yield %>
   </body>
