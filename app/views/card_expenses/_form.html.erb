@@ -13,42 +13,41 @@
 
   <div class="field">
     <%= form.label :card_id %>
-    <%= form.text_field :card_id %>
+    <%= form.collection_select :card_id, @cards, :id, :name, { selected: @card_expense.card } %>
   </div>
 
   <div class="field">
     <%= form.label :payable_id %>
-    <%= form.text_field :payable_id %>
+    <select name="card_expense[payable]">
+      <% @payables.each do |payable| %>
+        <option
+          value = "<%= payable.payable_type %>:<%= payable.payable_id %>"
+          <%= "selected" if payable_selected(payable) %>
+        >
+          <%= payable.name %>
+        </option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
   </div>
 
   <div class="field">
     <%= form.label :installments %>
-    <%= form.number_field :installments %>
+    <%= form.number_field :installments, min: 1 %>
   </div>
 
   <div class="field">
     <%= form.label :value %>
-    <%= form.text_field :value %>
+    <%= form.number_field :value, min: 1, step: 0.1 %>
   </div>
 
   <div class="field">
     <%= form.label :due_date %>
     <%= form.date_select :due_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_date %>
-    <%= form.date_select :last_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :total %>
-    <%= form.text_field :total %>
   </div>
 
   <div class="actions">
