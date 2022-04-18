@@ -1,4 +1,4 @@
-<%= form_with(model: card_expense, local: true) do |form| %>
+<%= form_for(@card_expense, url: card_expenses_form_url) do |form| %>
   <% if card_expense.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(card_expense.errors.count, "error") %> prohibited this card_expense from being saved:</h2>
@@ -10,12 +10,7 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :card_id %>
-    <%= form.collection_select :card_id, @cards, :id, :name, { selected: @card_expense.card } %>
-  </div>
-
+  <input type = "hidden" name = "card_id" value = "<%= @card.id %>">
   <div class="field">
     <%= form.label :payable_id %>
     <select name="card_expense[payable]">

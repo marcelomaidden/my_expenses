@@ -1,6 +1,6 @@
 class CardExpensesController < ApplicationController
   before_action :set_card_expense, only: %i[ show edit update destroy ]
-  before_action :set_card, only: :index
+  before_action :set_card
   before_action :set_payables, only: %i[new create edit]
   before_action :set_cards, only: %i[new create edit]
   before_action :set_payable, only: %i[create update]
@@ -15,7 +15,7 @@ class CardExpensesController < ApplicationController
 
   # GET /card_expenses/new
   def new
-    @card_expense = CardExpense.new
+    @card_expense = @card.card_expenses.new
   end
 
   # GET /card_expenses/1/edit
@@ -24,12 +24,12 @@ class CardExpensesController < ApplicationController
 
   # POST /card_expenses or /card_expenses.json
   def create
-    @card_expense = CardExpense.new(card_expense_params.except(:payable))
+    @card_expense = @card.card_expenses.new(card_expense_params.except(:payable))
     @card_expense.payable = @payable
 
     respond_to do |format|
       if @card_expense.save
-        format.html { redirect_to card_expense_url(@card_expense), notice: "Card expense was successfully created." }
+        format.html { redirect_to card_card_expenses_url(@card), notice: "Card expense was successfully created." }
         format.json { render :show, status: :created, location: @card_expense }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class CardExpensesController < ApplicationController
   def update
     respond_to do |format|
       if @card_expense.update(card_expense_params.except(:payable))
-        format.html { redirect_to card_expense_url(@card_expense), notice: "Card expense was successfully updated." }
+        format.html { redirect_to card_card_expenses_url(@card), notice: "Card expense was successfully updated." }
         format.json { render :show, status: :ok, location: @card_expense }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class CardExpensesController < ApplicationController
     @card_expense.destroy
 
     respond_to do |format|
-      format.html { redirect_to card_expenses_url, notice: "Card expense was successfully destroyed." }
+      format.html { redirect_to card_card_expenses_url(@card), notice: "Card expense was successfully destroyed." }
       format.json { head :no_content }
     end
   end
