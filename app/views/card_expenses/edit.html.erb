@@ -1,3 +1,5 @@
-<h1>Editing Card Expense</h1>
+<%= render WrapperComponent.new do %>
+  <h1>Editing Card Expense</h1>
 
-<%= render 'form', card_expense: @card_expense %>
+  <%= render 'form', card_expense: @card_expense %>
+<% end %>

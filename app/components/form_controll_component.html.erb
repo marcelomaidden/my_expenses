@@ -1,0 +1,8 @@
+<div class="d-flex flex-row align-items-center mb-4">
+  <% if icon_type.present? %>
+    <i class="fa fa-<%= icon_type %> fa-lg me-3 fa-fw"></i>
+  <% end %>
+  <div class="form-outline flex-fill mb-0">
+    <%= content %>
+  </div>
+</div>

@@ -16,47 +16,33 @@
 
                 <%= form_for(resource, form_hash) do |f| %>
                   <%= render "devise/shared/error_messages", resource: resource %>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fa fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <%= f.label :name, "Your name" %>
-                      <%= f.text_field :name, autofocus: true, class: "form-control" %>
-                    </div>
-                  </div>
+                  <%= render FormControllComponent.new(icon_type: "user") do %>
+                    <%= f.label :name, "Your name" %>
+                    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+                  <% end %>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
+                  <%= render FormControllComponent.new(icon_type: "envelope") do %>
                       <%= f.label :email %>
                       <%= f.email_field :email, class: "form-control", autocomplete: "email" %>
-                    </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <%= f.label :password %>
-                      <% if @minimum_password_length %>
-                      <em>(<%= @minimum_password_length %> characters minimum)</em>
-                      <% end %>
-                      <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
-                    </div>
-                  </div>
+                  <% end %>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fa fa-key fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <%= f.label :password_confirmation %><br />
-                      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
-                    </div>
-                  </div>
+                  <%= render FormControllComponent.new(icon_type: "lock") do %>
+                    <%= f.label :password %>
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %>
+                    <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+                  <% end %>
+
+                  <%= render FormControllComponent.new(icon_type: "key") do %>
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+                  <% end %>
                   <% if type == "edit" %>
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-                        <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
-                      </div>
-                    </div>
+                    <%= render FormControllComponent.new(icon_type: "lock") do %>
+                      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                      <%= f.password_field :current_password, class: "form-control", autocomplete: "current-password" %>
+                    <% end %>
                   <% end %>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
