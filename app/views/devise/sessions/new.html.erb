@@ -7,21 +7,16 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <%= f.label :email %><br />
-                        <%= f.email_field :email, autofocus: true, class: "form-control", autocomplete: "email" %>
-                      </div>
-                    </div>
+                    <%= render FormControllComponent.new(icon_type: "envelope") do %>
+                      <%= f.label :email %><br />
+                      <%= f.email_field :email, autofocus: true, class: "form-control", autocomplete: "email" %>
+                    <% end %>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <%= f.label :password %><br />
-                        <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
-                      </div>
-                    </div>
+                    <%= render FormControllComponent.new(icon_type: "lock") do %>
+                      <%= f.label :password %><br />
+                      <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
+                    <% end %>
+
                     <% if devise_mapping.rememberable? %>
                       <div class="field">
                         <%= f.check_box :remember_me %>

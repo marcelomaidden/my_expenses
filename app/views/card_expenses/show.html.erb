@@ -1,0 +1,44 @@
+<%= render WrapperComponent.new do %>
+  <p>
+    <strong>Card:</strong>
+    <%= @card_expense.card.name %>
+  </p>
+
+  <p>
+    <strong>Payable:</strong>
+    <%= @card_expense.payable&.name %>
+  </p>
+
+  <p>
+    <strong>Installments:</strong>
+    <%= @card_expense.installments %>
+  </p>
+
+  <p>
+    <strong>Value:</strong>
+    <%= @card_expense.value %>
+  </p>
+
+  <p>
+    <strong>Due date:</strong>
+    <%= @card_expense.due_date %>
+  </p>
+
+  <p>
+    <strong>Last date:</strong>
+    <%= @card_expense.last_date %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= @card_expense.status %>
+  </p>
+
+  <p>
+    <strong>Total:</strong>
+    <%= @card_expense.total %>
+  </p>
+
+  <%= link_to 'Edit', edit_card_card_expense_path(@card, @card_expense) %> |
+  <%= link_to 'Back', card_card_expenses_path %>
+<% end %>
