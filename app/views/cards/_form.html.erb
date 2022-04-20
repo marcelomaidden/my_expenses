@@ -11,45 +11,43 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <%= form.text_field :name, class: "form-control" %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :number %>
-    <%= form.number_field :number %>
-  </div>
+    <%= form.text_field :number, class: "form-control" %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :expiration %>
-    <%= form.date_select :expiration %>
-  </div>
+    <%= form.date_select :expiration, class: "form-control" %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :status %>
-    <%= form.number_field :status %>
-  </div>
+    <%= form.select(:status, options_for_select(@statuses, @card.status), {}, { class: "form-control" }) %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :card_category_id %>
-    <%= form.text_field :card_category_id %>
-  </div>
+    <%= form.select(:card_category_id, options_for_select(@categories, @card.card_category_id),
+                    {}, { class: "form-control" }) %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :manager %>
-    <%= form.number_field :manager %>
-  </div>
+    <%= form.select(:manager_id,
+                    options_for_select(@managers, selected: @card.manager_id),
+                    {}, { class: "form-control" }) %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :cvv %>
-    <%= form.number_field :cvv %>
-  </div>
+    <%= form.number_field :cvv, class: "form-control" %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

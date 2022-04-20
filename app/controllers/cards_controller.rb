@@ -1,5 +1,9 @@
 class CardsController < ApplicationController
   before_action :set_card, only: %i[ show edit update destroy ]
+  before_action :set_categories, only: %i[new edit create update]
+  before_action :set_statuses, only: %i[new edit create update]
+  before_action :set_managers, only: %i[new edit create update]
+
   # GET /cards or /cards.json
   def index
     @cards = current_user.cards.or(current_user.managed_cards)
@@ -20,7 +24,7 @@ class CardsController < ApplicationController
 
   # POST /cards or /cards.json
   def create
-    @card = Card.new(card_params)
+    @card = current_user.cards.new(card_params)
 
     respond_to do |format|
       if @card.save
@@ -62,8 +66,20 @@ class CardsController < ApplicationController
       @card = Card.find(params[:id])
     end
 
+    def set_categories
+      @categories = CardCategory.active.order(name: :asc).collect { |c| [c.name, c.id] }
+    end
+
+    def set_statuses
+      @statuses = CardCategory::STATUS.map { |key, value| key }.sort_by { |value| value }
+    end
+
+    def set_managers
+      @managers = User.all.order(name: :asc).collect { |u| [u.name, u.id]}
+    end
+
     # Only allow a list of trusted parameters through.
     def card_params
-      params.require(:card).permit(:user_id, :name, :number, :expiration, :status, :card_category_id, :manager, :cvv)
+      params.require(:card).permit(:user_id, :name, :number, :expiration, :status, :card_category_id, :manager_id, :cvv)
     end
 end

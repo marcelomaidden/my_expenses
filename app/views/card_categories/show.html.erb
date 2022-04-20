@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%= render WrapperComponent.new do %>
+  <p>
+    <strong>Name:</strong>
+    <%= @card_category.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @card_category.name %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @card_category.status %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @card_category.status %>
-</p>
-
-<%= link_to 'Edit', edit_card_category_path(@card_category) %> |
-<%= link_to 'Back', card_categories_path %>
+  <%= link_to 'Edit', edit_card_category_path(@card_category) %> |
+  <%= link_to 'Back', card_categories_path %>
+<% end %>

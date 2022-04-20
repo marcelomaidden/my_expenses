@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <input type = "hidden" name = "card_id" value = "<%= @card.id %>">
-  <%= render FormControllComponent.new do %>
+  <%= render FormControlComponent.new do %>
     <%= form.label :payable_id %>
     <select name="card_expense[payable]", class = "form-control">
       <% @payables.each do |payable| %>
@@ -25,22 +25,22 @@
     </select>
   <% end %>
 
-  <%= render FormControllComponent.new do %>
+  <%= render FormControlComponent.new do %>
     <%= form.label :description %>
     <%= form.text_field :description, class: "form-control" %>
   <% end %>
 
-  <%= render FormControllComponent.new do %>
+  <%= render FormControlComponent.new do %>
     <%= form.label :installments %>
     <%= form.number_field :installments, min: 1, class: "form-control" %>
   <% end %>
 
-  <%= render FormControllComponent.new do %>
+  <%= render FormControlComponent.new do %>
     <%= form.label :value %>
     <%= form.number_field :value, min: 1, step: 0.1, class: "form-control" %>
   <% end %>
 
-  <%= render FormControllComponent.new do %>
+  <%= render FormControlComponent.new do %>
     <%= form.label :due_date %>
     <%= form.date_select :due_date, class: "form-control" %>
   <% end %>

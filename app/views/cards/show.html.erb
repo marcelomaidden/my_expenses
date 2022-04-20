@@ -1,44 +1,44 @@
-<p id="notice"><%= notice %></p>
+<%= render WrapperComponent.new do %>
+  <p>
+    <strong>User:</strong>
+    <%= @card.user_name %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @card.user_id %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @card.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @card.name %>
-</p>
+  <p>
+    <strong>Number:</strong>
+    <%= @card.number %>
+  </p>
 
-<p>
-  <strong>Number:</strong>
-  <%= @card.number %>
-</p>
+  <p>
+    <strong>Expiration:</strong>
+    <%= @card.expiration %>
+  </p>
 
-<p>
-  <strong>Expiration:</strong>
-  <%= @card.expiration %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @card.status %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @card.status %>
-</p>
+  <p>
+    <strong>Card category:</strong>
+    <%= @card.category_name %>
+  </p>
 
-<p>
-  <strong>Card category:</strong>
-  <%= @card.card_category_id %>
-</p>
+  <p>
+    <strong>Manager:</strong>
+    <%= @card.manager_name %>
+  </p>
 
-<p>
-  <strong>Manager:</strong>
-  <%= @card.manager %>
-</p>
+  <p>
+    <strong>Cvv:</strong>
+    <%= @card.cvv %>
+  </p>
 
-<p>
-  <strong>Cvv:</strong>
-  <%= @card.cvv %>
-</p>
-
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+  <%= link_to 'Edit', edit_card_path(@card) %> |
+  <%= link_to 'Back', cards_path %>
+<% end %>
