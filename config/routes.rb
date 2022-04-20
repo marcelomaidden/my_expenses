@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :card_categories
 
   resources :cards do
-    resources :card_expenses
+    resources :expenses
   end
   devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions'}
   root to: "cards#index"

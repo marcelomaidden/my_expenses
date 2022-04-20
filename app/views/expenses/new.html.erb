@@ -1,0 +1,7 @@
+<%= render WrapperComponent.new do %>
+  <h1>New Expense</h1>
+
+  <%= render 'form', expense: @expense %>
+
+  <%= link_to 'Back', card_expenses_path %>
+<% end %>

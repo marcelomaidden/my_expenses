@@ -1,5 +1,5 @@
-class CardExpense < ApplicationRecord
-  belongs_to :card
+class Expense < ApplicationRecord
+  belongs_to :billable, polymorphic: true
   belongs_to :payable, polymorphic: true, optional: true
 
   enum status: %i[inactive active]
@@ -9,6 +9,14 @@ class CardExpense < ApplicationRecord
   validates :value, :description, presence: true
 
   before_create :set_installments
+
+  def billable_name
+    billable.name
+  end
+
+  def payable_name
+    payable&.name
+  end
 
   private
 

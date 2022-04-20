@@ -10,32 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_17_165444) do
+ActiveRecord::Schema.define(version: 2022_04_20_190114) do
 
   create_table "card_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.integer "status", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "card_expenses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "card_id", null: false
-    t.string "payable_type", null: false
-    t.bigint "payable_id", null: false
-    t.string "description", null: false
-    t.integer "installments", default: 1
-    t.float "value"
-    t.date "due_date"
-    t.date "last_date"
-    t.integer "status", default: 1
-    t.integer "recurrent", default: 0
-    t.integer "frequency", default: 1
-    t.float "total"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["card_id"], name: "index_card_expenses_on_card_id"
-    t.index ["payable_type", "payable_id"], name: "index_card_expenses_on_payable_type_and_payable_id"
   end
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -53,6 +34,25 @@ ActiveRecord::Schema.define(version: 2022_04_17_165444) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
+  create_table "expenses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "payable_type", null: false
+    t.bigint "payable_id", null: false
+    t.string "description", null: false
+    t.integer "installments", default: 1
+    t.float "value"
+    t.date "due_date"
+    t.date "last_date"
+    t.integer "status", default: 1
+    t.integer "recurrent", default: 0
+    t.integer "frequency", default: 1
+    t.float "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "billable_type", null: false
+    t.bigint "billable_id", null: false
+    t.index ["billable_type", "billable_id"], name: "index_expenses_on_billable_type_and_billable_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", default: "", null: false
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2022_04_17_165444) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "card_expenses", "cards"
   add_foreign_key "cards", "card_categories"
   add_foreign_key "cards", "users"
 end
