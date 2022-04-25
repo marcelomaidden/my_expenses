@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FormControllComponent < ViewComponent::Base
+class FormControlComponent < ViewComponent::Base
   attr_reader :icon_type
 
   def initialize(icon_type: nil)

@@ -1,9 +1,10 @@
 <h1>Cards</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
+      <th>User</th>
       <th>Number</th>
       <th>Expiration</th>
       <th>Status</th>
@@ -15,14 +16,15 @@
   </thead>
 
   <tbody>
-    <% @cards.each do |card| %>
+    <% @cards.flatten.each do |card| %>
       <tr>
         <td><%= card.name %></td>
+        <td><%= card.user_name %></td>
         <td><%= card.number %></td>
         <td><%= card.expiration %></td>
         <td><%= card.status %></td>
-        <td><%= card.card_category.name %></td>
-        <td><%= card.manager&.name %></td>
+        <td><%= card.category_name %></td>
+        <td><%= card.manager_name %></td>
         <td><%= card.cvv %></td>
         <td><%= link_to 'Show', card %></td>
         <td><%= link_to 'Edit', edit_card_path(card) %></td>

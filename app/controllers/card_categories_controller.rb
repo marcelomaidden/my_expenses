@@ -1,5 +1,6 @@
 class CardCategoriesController < ApplicationController
   before_action :set_card_category, only: %i[ show edit update destroy ]
+  before_action :set_statuses, only: %i[ new edit update create ]
 
   # GET /card_categories or /card_categories.json
   def index
@@ -61,6 +62,10 @@ class CardCategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_card_category
       @card_category = CardCategory.find(params[:id])
+    end
+
+    def set_statuses
+      @statuses = CardCategory::STATUS.map { |key, value| key }.sort_by { |value| value }
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,4 +1,4 @@
-<%= form_with(model: card, local: true) do |form| %>
+<%= form_with(model: card, local: true, builder: CustomFormBuilder) do |form| %>
   <% if card.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(card.errors.count, "error") %> prohibited this card from being saved:</h2>
@@ -11,45 +11,41 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :name %>
     <%= form.text_field :name %>
-  </div>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :number %>
-    <%= form.number_field :number %>
-  </div>
+    <%= form.text_field :number %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :expiration %>
     <%= form.date_select :expiration %>
-  </div>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :status %>
-    <%= form.number_field :status %>
-  </div>
+    <%= form.select(:status, options_for_select(@statuses, @card.status), {}) %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :card_category_id %>
-    <%= form.text_field :card_category_id %>
-  </div>
+    <%= form.select(:card_category_id, options_for_select(@categories, @card.card_category_id),{}) %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :manager %>
-    <%= form.number_field :manager %>
-  </div>
+    <%= form.select(:manager_id,
+                    options_for_select(@managers, selected: @card.manager_id), {}) %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :cvv %>
     <%= form.number_field :cvv %>
-  </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

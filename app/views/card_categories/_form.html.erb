@@ -4,22 +4,22 @@
       <h2><%= pluralize(card_category.errors.count, "error") %> prohibited this card_category from being saved:</h2>
 
       <ul>
-        <% card_category.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% card_category.errors.messages.each do |message| %>
+          <%= render NotificationComponent.new(message: message[1], type: "danger", title: message[0].capitalize) %>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <%= form.text_field :name, class: "form-control" %>
+  <% end %>
 
-  <div class="field">
+  <%= render FormControlComponent.new do %>
     <%= form.label :status %>
-    <%= form.number_field :status %>
-  </div>
+    <%= form.select(:status, options_for_select(@statuses, @card_category.status), {}, { class: "form-control" }) %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

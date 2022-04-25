@@ -1,0 +1,47 @@
+<%= render WrapperComponent.new do %>
+  <h1>Card Expenses</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Card</th>
+        <th scope="col">Payable</th>
+        <th scope="col">Installments</th>
+        <th scope="col">Value</th>
+        <th scope="col">Due date</th>
+        <th scope="col">Last date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Total</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @expenses.each do |expense| %>
+        <tr>
+          <th scope="row">#</th>
+          <td><%= expense.billable_name %></td>
+          <td><%= expense.payable_name %></td>
+          <td><%= expense.installments %></td>
+          <td><%= expense.value %></td>
+          <td><%= expense.due_date %></td>
+          <td><%= expense.last_date %></td>
+          <td><%= expense.status %></td>
+          <td><%= expense.total %></td>
+          <td>
+            <a href="<%= billable_expense_path(expense) %>">Show</a>
+          </td>
+          <td>
+            <a href="<%= billable_expense_path(expense) %>/edit">Edit</a>
+          </td>
+          <td><%= link_to 'Destroy', [expense.billable, expense], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Card Expense', new_expense_path(@billable) %>
+<% end %>

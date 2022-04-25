@@ -1,0 +1,44 @@
+<%= render WrapperComponent.new do %>
+  <p>
+    <strong>Billable:</strong>
+    <%= @expense.billable_name %>
+  </p>
+
+  <p>
+    <strong>Payable:</strong>
+    <%= @expense.payable_name %>
+  </p>
+
+  <p>
+    <strong>Installments:</strong>
+    <%= @expense.installments %>
+  </p>
+
+  <p>
+    <strong>Value:</strong>
+    <%= @expense.value %>
+  </p>
+
+  <p>
+    <strong>Due date:</strong>
+    <%= @expense.due_date %>
+  </p>
+
+  <p>
+    <strong>Last date:</strong>
+    <%= @expense.last_date %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= @expense.status %>
+  </p>
+
+  <p>
+    <strong>Total:</strong>
+    <%= @expense.total %>
+  </p>
+
+  <a href="<%= billable_expense_path(@expense) %>/edit">Edit</a> |
+  <a href="<%= expenses_path(@expense.billable) %>">Back</a>
+<% end %>

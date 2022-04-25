@@ -1,6 +1,8 @@
-<h1>Editing Card Category</h1>
+<%= render WrapperComponent.new do %>
+  <h1>Editing Card Category</h1>
 
-<%= render 'form', card_category: @card_category %>
+  <%= render 'form', card_category: @card_category %>
 
-<%= link_to 'Show', @card_category %> |
-<%= link_to 'Back', card_categories_path %>
+  <%= link_to 'Show', @card_category %> |
+  <%= link_to 'Back', card_categories_path %>
+<% end %>
