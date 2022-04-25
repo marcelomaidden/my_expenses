@@ -1,11 +1,11 @@
 <%= render WrapperComponent.new do %>
-  <h1>Card Expenses</h1>
+  <h1><%= billable_header %> Expenses</h1>
 
   <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Card</th>
+        <th scope="col"><%= billable_header %></th>
         <th scope="col">Payable</th>
         <th scope="col">Installments</th>
         <th scope="col">Value</th>

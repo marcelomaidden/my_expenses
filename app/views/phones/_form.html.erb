@@ -1,0 +1,22 @@
+<%= form_with(model: phone, local: true, builder: CustomFormBuilder) do |form| %>
+  <% if phone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(phone.errors.count, "error") %> prohibited this phone from being saved:</h2>
+
+        <% phone.errors.messages.each do |message| %>
+          <%= render NotificationComponent.new(message: message, type: "danger", title: "Error") %>
+        <% end %>
+    </div>
+  <% end %>
+
+  <%= render ManagerComponent.new(managers: @managers, model: @phone, form: form) %>
+
+  <%= render FormControlComponent.new do %>
+    <%= form.label :number %>
+    <%= form.text_field :number %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

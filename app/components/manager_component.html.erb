@@ -1,0 +1,5 @@
+  <%= render FormControlComponent.new do %>
+    <%= form.label :manager %>
+    <%= form.select(:manager_id,
+                    options_for_select(managers, selected: model.manager_id), {}) %>
+  <% end %>

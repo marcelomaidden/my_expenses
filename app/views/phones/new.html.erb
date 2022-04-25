@@ -1,0 +1,7 @@
+<%= render WrapperComponent.new do %>
+  <h1>New Phone</h1>
+
+  <%= render 'form', phone: @phone %>
+
+  <%= link_to 'Back', phones_path %>
+<% end %>

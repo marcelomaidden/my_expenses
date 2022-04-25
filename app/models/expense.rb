@@ -11,11 +11,11 @@ class Expense < ApplicationRecord
   before_create :set_installments
 
   def billable_name
-    billable.name
+    billable.try(:name) || billable.try(:number)
   end
 
   def payable_name
-    payable&.name
+    payable&.try(:name) || payable&.try(:number)
   end
 
   private

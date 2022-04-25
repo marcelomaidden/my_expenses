@@ -2,7 +2,7 @@
 
 Please include a summary of the change and which issue or Jira task is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
 
-Monday link issue: https://zygo-ped.monday.com/boards/...
+Monday link issue: https://url/...
 
 ## Type of change
 

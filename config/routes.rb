@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :phones do
+    resources :expenses
+  end
+
   resources :card_categories
 
   resources :cards do
