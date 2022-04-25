@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Phones</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>User</th>
@@ -13,10 +11,10 @@
   </thead>
 
   <tbody>
-    <% @phones.each do |phone| %>
+    <% @phones.flatten.each do |phone| %>
       <tr>
-        <td><%= phone.user_id %></td>
-        <td><%= phone.manager_id %></td>
+        <td><%= phone.user_name %></td>
+        <td><%= phone.manager_name %></td>
         <td><%= phone.number %></td>
         <td><%= link_to 'Show', phone %></td>
         <td><%= link_to 'Edit', edit_phone_path(phone) %></td>

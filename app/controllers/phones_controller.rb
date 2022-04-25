@@ -3,7 +3,8 @@ class PhonesController < ApplicationController
 
   # GET /phones or /phones.json
   def index
-    @phones = Phone.all
+    @phones = [current_user.phones]
+    @phones << current_user.managed_phones
   end
 
   # GET /phones/1 or /phones/1.json
