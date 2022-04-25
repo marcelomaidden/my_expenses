@@ -11,9 +11,12 @@
   </head>
 
   <body>
+    <%= render NavBarComponent.new(current_user: current_user) %>
     <% flash.each do |type, message|  %>
       <%= render NotificationComponent.new(message: message, type: type, title: "Message") %>
     <% end %>
-    <%= yield %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
   </body>
 </html>

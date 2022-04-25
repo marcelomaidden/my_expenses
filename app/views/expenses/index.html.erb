@@ -29,8 +29,12 @@
           <td><%= expense.last_date %></td>
           <td><%= expense.status %></td>
           <td><%= expense.total %></td>
-          <td><%= link_to 'Show', card_expense_path(expense.billable, expense) %></td>
-          <td><%= link_to 'Edit', edit_card_expense_path(expense.billable, expense) %></td>
+          <td>
+            <a href="<%= billable_expense_path(expense) %>">Show</a>
+          </td>
+          <td>
+            <a href="<%= billable_expense_path(expense) %>/edit">Edit</a>
+          </td>
           <td><%= link_to 'Destroy', [expense.billable, expense], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
@@ -39,5 +43,5 @@
 
   <br>
 
-  <%= link_to 'New Card Expense', new_card_expense_path(@card) %>
+  <%= link_to 'New Card Expense', new_expense_path(@billable) %>
 <% end %>

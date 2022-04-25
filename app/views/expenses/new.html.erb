@@ -3,5 +3,5 @@
 
   <%= render 'form', expense: @expense %>
 
-  <%= link_to 'Back', card_expenses_path %>
+  <%= link_to 'Back', expenses_path(@expense.billable) %>
 <% end %>

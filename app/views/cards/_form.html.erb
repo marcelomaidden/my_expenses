@@ -1,4 +1,4 @@
-<%= form_with(model: card, local: true) do |form| %>
+<%= form_with(model: card, local: true, builder: CustomFormBuilder) do |form| %>
   <% if card.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(card.errors.count, "error") %> prohibited this card from being saved:</h2>
@@ -13,40 +13,38 @@
 
   <%= render FormControlComponent.new do %>
     <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
+    <%= form.text_field :name %>
   <% end %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :number %>
-    <%= form.text_field :number, class: "form-control" %>
+    <%= form.text_field :number %>
   <% end %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :expiration %>
-    <%= form.date_select :expiration, class: "form-control" %>
+    <%= form.date_select :expiration %>
   <% end %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :status %>
-    <%= form.select(:status, options_for_select(@statuses, @card.status), {}, { class: "form-control" }) %>
+    <%= form.select(:status, options_for_select(@statuses, @card.status), {}) %>
   <% end %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :card_category_id %>
-    <%= form.select(:card_category_id, options_for_select(@categories, @card.card_category_id),
-                    {}, { class: "form-control" }) %>
+    <%= form.select(:card_category_id, options_for_select(@categories, @card.card_category_id),{}) %>
   <% end %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :manager %>
     <%= form.select(:manager_id,
-                    options_for_select(@managers, selected: @card.manager_id),
-                    {}, { class: "form-control" }) %>
+                    options_for_select(@managers, selected: @card.manager_id), {}) %>
   <% end %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :cvv %>
-    <%= form.number_field :cvv, class: "form-control" %>
+    <%= form.number_field :cvv %>
   <% end %>
 
   <div class="actions">

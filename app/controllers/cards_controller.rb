@@ -1,12 +1,14 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: %i[ show edit update destroy ]
+  before_action :set_billable, only: %i[ show ]
+  before_action :set_card, only: %i[ edit update destroy ]
   before_action :set_categories, only: %i[new edit create update]
   before_action :set_statuses, only: %i[new edit create update]
   before_action :set_managers, only: %i[new edit create update]
 
   # GET /cards or /cards.json
   def index
-    @cards = current_user.cards.or(current_user.managed_cards)
+    @cards = [current_user.cards]
+    @cards << current_user.managed_cards
   end
 
   # GET /cards/1 or /cards/1.json
@@ -62,6 +64,10 @@ class CardsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_billable
+      @billable = Card.find(params[:id])
+    end
+
     def set_card
       @card = Card.find(params[:id])
     end

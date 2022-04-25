@@ -1,45 +1,45 @@
 <%= render WrapperComponent.new do %>
   <p>
     <strong>User:</strong>
-    <%= @card.user_name %>
+    <%= @billable.user_name %>
   </p>
 
   <p>
     <strong>Name:</strong>
-    <%= @card.name %>
+    <%= @billable.name %>
   </p>
 
   <p>
     <strong>Number:</strong>
-    <%= @card.number %>
+    <%= @billable.number %>
   </p>
 
   <p>
     <strong>Expiration:</strong>
-    <%= @card.expiration %>
+    <%= @billable.expiration %>
   </p>
 
   <p>
     <strong>Status:</strong>
-    <%= @card.status %>
+    <%= @billable.status %>
   </p>
 
   <p>
     <strong>Card category:</strong>
-    <%= @card.category_name %>
+    <%= @billable.category_name %>
   </p>
 
   <p>
     <strong>Manager:</strong>
-    <%= @card.manager_name %>
+    <%= @billable.manager_name %>
   </p>
 
   <p>
     <strong>Cvv:</strong>
-    <%= @card.cvv %>
+    <%= @billable.cvv %>
   </p>
 
-  <%= link_to 'Edit', edit_card_path(@card) %> |
-  <%= link_to 'Expenses', card_expenses_url(@card) %> |
+  <%= link_to 'Edit', edit_card_path(@billable) %> |
+  <%= link_to 'Expenses', card_expenses_url(@billable) %> |
   <%= link_to 'Back', cards_path %>
 <% end %>

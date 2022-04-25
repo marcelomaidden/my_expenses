@@ -1,6 +1,6 @@
 <%= render WrapperComponent.new do %>
   <p>
-    <strong>Card:</strong>
+    <strong>Billable:</strong>
     <%= @expense.billable_name %>
   </p>
 
@@ -39,6 +39,6 @@
     <%= @expense.total %>
   </p>
 
-  <%= link_to 'Edit', edit_card_expense_path(@card, @expense) %> |
-  <%= link_to 'Back', card_expenses_path %>
+  <a href="<%= billable_expense_path(@expense) %>/edit">Edit</a> |
+  <a href="<%= expenses_path(@expense.billable) %>">Back</a>
 <% end %>

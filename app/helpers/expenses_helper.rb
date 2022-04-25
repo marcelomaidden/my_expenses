@@ -6,4 +6,16 @@ module ExpensesHelper
   def billable_selected(billable)
     @expense.billable_type == billable.payable_type &&  @expense.billable_id == billable.billable_id
   end
+
+  def billable_expense_path(expense)
+    "#{expenses_path(expense.billable)}/#{expense.id}"
+  end
+
+  def expenses_path(billable)
+    "/#{@billable_type}/#{billable.id}/expenses"
+  end
+
+  def new_expense_path(billable)
+    "/#{@billable_type}/#{@billable.id}/expenses/new"
+  end
 end

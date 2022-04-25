@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @cards.each do |card| %>
+    <% @cards.flatten.each do |card| %>
       <tr>
         <td><%= card.name %></td>
         <td><%= card.user_name %></td>

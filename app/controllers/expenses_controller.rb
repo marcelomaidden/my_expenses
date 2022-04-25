@@ -1,12 +1,12 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: %i[ show edit update destroy ]
-  before_action :set_card
-  before_action :set_payables, only: %i[new create edit]
-  before_action :set_cards, only: %i[new create edit]
+  before_action :set_billable
+  before_action :set_payables, only: %i[ new create edit ]
+  before_action :set_billables, only: %i[ new create edit index ]
   before_action :set_payable, only: %i[create update]
   # GET /expenses or /expenses.json
   def index
-    @expenses = @card.expenses
+    @expenses = @billable.expenses
   end
 
   # GET /expenses/1 or /expenses/1.json
@@ -15,7 +15,7 @@ class ExpensesController < ApplicationController
 
   # GET /expenses/new
   def new
-    @expense = @card.expenses.new
+    @expense = @billable.expenses.new
   end
 
   # GET /expenses/1/edit
@@ -24,12 +24,12 @@ class ExpensesController < ApplicationController
 
   # POST /expenses or /expenses.json
   def create
-    @expense = @card.expenses.new(expense_params.except(:payable))
+    @expense = @billable.expenses.new(expense_params.except(:payable))
     @expense.payable = @payable
 
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to card_expenses_url(@card), notice: "Card expense was successfully created." }
+        format.html { redirect_to helpers.expenses_path(@expense), notice: "Card expense was successfully created." }
         format.json { render :show, status: :created, location: @expense }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       if @expense.update(expense_params.except(:payable))
         @expense.update payable: @payable
-        format.html { redirect_to card_expenses_url(@card), notice: "Card expense was successfully updated." }
+        format.html { redirect_to helpers.expenses_path(@billable), notice: "Card expense was successfully updated." }
         format.json { render :show, status: :ok, location: @expense }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,15 +57,20 @@ class ExpensesController < ApplicationController
     @expense.destroy
 
     respond_to do |format|
-      format.html { redirect_to expenses_url(@card), notice: "Card expense was successfully destroyed." }
+      format.html { redirect_to helpers.expenses_path(@billable), notice: "Card expense was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_card
-      @card = Card.find(params[:card_id])
+    def set_billable
+      @billable_type = begin
+        "cards" if params[:card_id]
+      end
+      @billable = begin
+        Card.find(params[:card_id]) if params[:card_id]
+      end
     end
 
     def set_payable
@@ -80,8 +85,10 @@ class ExpensesController < ApplicationController
                       .select("payable.*")
     end
 
-    def set_cards
-      @cards = Card.all.order(name: :asc)
+    def set_billables
+      @billables = begin
+        return Card.all.order(name: :asc) if params[:card_id]
+      end
     end
 
     def set_expense
