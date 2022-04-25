@@ -1,1 +1,1 @@
-json.array! @phones, partial: "phones/phone", as: :phone
+json.array! @phones, partial: 'phones/phone', as: :phone
