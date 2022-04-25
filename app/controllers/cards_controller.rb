@@ -65,7 +65,7 @@ class CardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_billable
-      @billable = Card.find(params[:id])
+      super(model: Card)
     end
 
     def set_card
@@ -78,10 +78,6 @@ class CardsController < ApplicationController
 
     def set_statuses
       @statuses = CardCategory::STATUS.map { |key, value| key }.sort_by { |value| value }
-    end
-
-    def set_managers
-      @managers = User.all.order(name: :asc).collect { |u| [u.name, u.id]}
     end
 
     # Only allow a list of trusted parameters through.

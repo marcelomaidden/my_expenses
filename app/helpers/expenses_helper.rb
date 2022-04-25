@@ -18,4 +18,8 @@ module ExpensesHelper
   def new_expense_path(billable)
     "/#{@billable_type}/#{@billable.id}/expenses/new"
   end
+
+  def billable_header
+    @billable_type.singularize.capitalize
+  end
 end

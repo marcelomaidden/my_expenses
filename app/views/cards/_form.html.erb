@@ -36,11 +36,7 @@
     <%= form.select(:card_category_id, options_for_select(@categories, @card.card_category_id),{}) %>
   <% end %>
 
-  <%= render FormControlComponent.new do %>
-    <%= form.label :manager %>
-    <%= form.select(:manager_id,
-                    options_for_select(@managers, selected: @card.manager_id), {}) %>
-  <% end %>
+  <%= render ManagerComponent.new(managers: @managers, model: @card, form: form) %>
 
   <%= render FormControlComponent.new do %>
     <%= form.label :cvv %>

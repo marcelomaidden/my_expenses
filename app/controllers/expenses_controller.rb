@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
+  before_action :expenses_billable
   before_action :set_expense, only: %i[ show edit update destroy ]
-  before_action :set_billable
   before_action :set_payables, only: %i[ new create edit ]
   before_action :set_billables, only: %i[ new create edit index ]
   before_action :set_payable, only: %i[create update]
@@ -29,7 +29,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to helpers.expenses_path(@expense), notice: "Card expense was successfully created." }
+        format.html { redirect_to helpers.expenses_path(@billable), notice: "Card expense was successfully created." }
         format.json { render :show, status: :created, location: @expense }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,12 +64,17 @@ class ExpensesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_billable
-      @billable_type = begin
-        "cards" if params[:card_id]
+    def expenses_billable
+      @billable_type = if params[:card_id]
+        "cards"
+      else
+        "phones" if params[:phone_id]
       end
-      @billable = begin
-        Card.find(params[:card_id]) if params[:card_id]
+
+      @billable = if params[:card_id]
+        Card.find(params[:card_id])
+      else
+        Phone.find(params[:phone_id])
       end
     end
 
@@ -77,17 +82,21 @@ class ExpensesController < ApplicationController
       payable_param = expense_params[:payable].split(":")
       @payable = User.find(payable_param[1].to_i) if payable_param[0] == "User"
       @payable = Card.find(payable_param[1].to_i) if payable_param[0] == "Card"
+      @payable = Phone.find(payable_param[1].to_i) if payable_param[0] == "Phone"
     end
 
     def set_payables
       @payables = User.from("(SELECT 'User' as payable_type, users.id as payable_id, users.name FROM users \
-                              UNION SELECT 'Card' as payable_type, cards.id, cards.name FROM cards) as payable")
+                              UNION SELECT 'Card' as payable_type, cards.id, cards.name FROM cards
+                              UNION SELECT 'Phone' as payable_type, phones.id, phones.number FROM phones) as payable")
                       .select("payable.*")
     end
 
     def set_billables
-      @billables = begin
-        return Card.all.order(name: :asc) if params[:card_id]
+      @billables = if params[:card_id]
+        Card.all.order(name: :asc)
+      else
+        Phone.all.order(number: :asc)
       end
     end
 

@@ -1,19 +1,20 @@
-<p id="notice"><%= notice %></p>
+<%= render WrapperComponent.new do %>
+  <p>
+    <strong>User:</strong>
+    <%= @phone.user_name %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @phone.user_id %>
-</p>
+  <p>
+    <strong>Manager:</strong>
+    <%= @phone.manager_name %>
+  </p>
 
-<p>
-  <strong>Manager:</strong>
-  <%= @phone.manager_id %>
-</p>
+  <p>
+    <strong>Number:</strong>
+    <%= @phone.number %>
+  </p>
 
-<p>
-  <strong>Number:</strong>
-  <%= @phone.number %>
-</p>
-
-<%= link_to 'Edit', edit_phone_path(@phone) %> |
-<%= link_to 'Back', phones_path %>
+  <%= link_to 'Edit', edit_phone_path(@phone) %> |
+  <%= link_to 'Expenses', phone_expenses_url(@billable) %> |
+  <%= link_to 'Back', phones_path %>
+<% end %>

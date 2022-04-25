@@ -1,4 +1,7 @@
 class Phone < ApplicationRecord
-  belongs_to :user
-  belongs_to :manager, class_name: "User"
+  validates :number, presence: true
+  include UserBelongs
+  include ManagerBelongs
+
+  has_many :expenses, as: :billable
 end
