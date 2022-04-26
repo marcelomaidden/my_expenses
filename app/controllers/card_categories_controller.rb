@@ -1,6 +1,6 @@
 class CardCategoriesController < ApplicationController
-  before_action :set_card_category, only: %i[ show edit update destroy ]
-  before_action :set_statuses, only: %i[ new edit update create ]
+  before_action :set_card_category, only: %i[show edit update destroy]
+  before_action :set_statuses, only: %i[new edit update create]
 
   # GET /card_categories or /card_categories.json
   def index
@@ -8,8 +8,7 @@ class CardCategoriesController < ApplicationController
   end
 
   # GET /card_categories/1 or /card_categories/1.json
-  def show
-  end
+  def show; end
 
   # GET /card_categories/new
   def new
@@ -17,8 +16,7 @@ class CardCategoriesController < ApplicationController
   end
 
   # GET /card_categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /card_categories or /card_categories.json
   def create
@@ -26,7 +24,7 @@ class CardCategoriesController < ApplicationController
 
     respond_to do |format|
       if @card_category.save
-        format.html { redirect_to card_category_url(@card_category), notice: "Card category was successfully created." }
+        format.html { redirect_to card_category_url(@card_category), notice: 'Card category was successfully created.' }
         format.json { render :show, status: :created, location: @card_category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +37,7 @@ class CardCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @card_category.update(card_category_params)
-        format.html { redirect_to card_category_url(@card_category), notice: "Card category was successfully updated." }
+        format.html { redirect_to card_category_url(@card_category), notice: 'Card category was successfully updated.' }
         format.json { render :show, status: :ok, location: @card_category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,23 +51,24 @@ class CardCategoriesController < ApplicationController
     @card_category.destroy
 
     respond_to do |format|
-      format.html { redirect_to card_categories_url, notice: "Card category was successfully destroyed." }
+      format.html { redirect_to card_categories_url, notice: 'Card category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_card_category
-      @card_category = CardCategory.find(params[:id])
-    end
 
-    def set_statuses
-      @statuses = CardCategory::STATUS.map { |key, value| key }.sort_by { |value| value }
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_card_category
+    @card_category = CardCategory.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def card_category_params
-      params.require(:card_category).permit(:name, :status)
-    end
+  def set_statuses
+    @statuses = CardCategory::STATUS.map { |key, _value| key }.sort
+  end
+
+  # Only allow a list of trusted parameters through.
+  def card_category_params
+    params.require(:card_category).permit(:name, :status)
+  end
 end

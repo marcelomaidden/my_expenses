@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FormControlComponent < ViewComponent::Base
   attr_reader :icon_type
 

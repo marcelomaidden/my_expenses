@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NotificationComponent < ViewComponent::Base
   attr_reader :message, :type, :title
 
@@ -11,14 +9,14 @@ class NotificationComponent < ViewComponent::Base
 
   def notification_background
     case type
-    when "notice"
-      "alert alert-success"
-    when "danger"
-      "alert alert-danger"
-    when "alert"
-      "alert alert-danger"
+    when 'notice'
+      'alert alert-success'
+    when 'danger'
+      'alert alert-danger'
+    when 'alert'
+      'alert alert-danger'
     else
-      "alert alert-dark"
+      'alert alert-dark'
     end
   end
 end
