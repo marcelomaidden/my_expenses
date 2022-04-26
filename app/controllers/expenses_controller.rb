@@ -27,7 +27,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to helpers.expenses_path(@billable), notice: 'Card expense was successfully created.' }
+        format.html { redirect_to helpers.expenses_path(@billable), notice: 'Expense was successfully created.' }
         format.json { render :show, status: :created, location: @expense }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       if @expense.update(expense_params.except(:payable))
         @expense.update payable: @payable
-        format.html { redirect_to helpers.expenses_path(@billable), notice: 'Card expense was successfully updated.' }
+        format.html { redirect_to helpers.expenses_path(@billable), notice: 'Expense was successfully updated.' }
         format.json { render :show, status: :ok, location: @expense }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class ExpensesController < ApplicationController
     @expense.destroy
 
     respond_to do |format|
-      format.html { redirect_to helpers.expenses_path(@billable), notice: 'Card expense was successfully destroyed.' }
+      format.html { redirect_to helpers.expenses_path(@billable), notice: 'Expense was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
