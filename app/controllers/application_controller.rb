@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     @managers = User.all.order(name: :asc).collect { |u| [u.name, u.id] }
   end
 
-  def set_billable(model:)
+  def billable(model:)
     @billable = model.find(params[:id])
   end
 end

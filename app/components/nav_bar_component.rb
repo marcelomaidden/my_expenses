@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NavBarComponent < ViewComponent::Base
   attr_reader :current_user
 

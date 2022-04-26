@@ -1,7 +1,7 @@
 class PhonesController < ApplicationController
   before_action :set_phone, only: %i[show edit update destroy]
   before_action :set_managers, only: %i[new edit create update]
-  before_action :set_billable, only: %i[show]
+  before_action :billable, only: %i[show]
 
   # GET /phones or /phones.json
   def index
@@ -65,7 +65,7 @@ class PhonesController < ApplicationController
     @phone = Phone.find(params[:id])
   end
 
-  def set_billable
+  def billable
     super(model: Phone)
   end
 

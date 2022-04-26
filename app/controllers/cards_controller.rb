@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_billable, only: %i[show]
+  before_action :billable, only: %i[show]
   before_action :set_card, only: %i[edit update destroy]
   before_action :set_categories, only: %i[new edit create update]
   before_action :set_statuses, only: %i[new edit create update]
@@ -63,7 +63,7 @@ class CardsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_billable
+  def billable
     super(model: Card)
   end
 
